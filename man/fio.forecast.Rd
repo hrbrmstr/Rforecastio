@@ -15,13 +15,13 @@
                            for.time=as.integer(Sys.time())-(60*60*6))
 }
 \arguments{
-  \item{base_size}{Base font size.}
+  \item{api.key}{Your forecast.io API key. (character)}
   
-  \item{base_family}{Base font family.}
-  
-  \item{use_sizes}{If \code{TRUE}, then define sizes and
-                   locations with reasonable defaults taken from
-                   \code{\link{theme_gray}}.}
+  \item{latitude}{Latitude for the forecast. (character)}
+
+  \item{longitude}{Longitude for the forecast. (character)}
+
+  \item{for.time}{Optional specificaion (in unix timestamp format) for what date/time you want the forecast data for. (integer)}  
 }
 \description{
 really simple R interface to forecast.io JSON data
