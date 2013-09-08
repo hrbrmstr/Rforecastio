@@ -21,7 +21,8 @@ Usage quick start:
      
     fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude)
     
-    
 See example usage in <code>examples/test.R</code>
+
+Hit: http://rud.is/b/tag/rforecastio/ occassionally to see if the blog has any more info (it will!)
 
 ![sample of what you can do](/examples/test.png)
