@@ -54,7 +54,7 @@ fio.forecast <- function(api.key, latitude, longitude, for.time) {
   
   # extract hourly forecast data  
   fio.hourly.df <- data.frame(
-    time = ISOdatetime(1960,1,1,0,0,0) + sapply(fio$hourly$data,"[[","time"),
+    time = as.POSIXlt(sapply(fio$hourly$data,"[[","time"), origin="1970-01-01"),
     summary = sapply(fio$hourly$data,"[[","summary"),
     icon = sapply(fio$hourly$data,"[[","icon"),
     precipIntensity = sapply(fio$hourly$data,"[[","precipIntensity"),
@@ -74,7 +74,7 @@ fio.forecast <- function(api.key, latitude, longitude, for.time) {
   if (missing(for.time)) {
     # extract minutely forecast data  
     fio.minutely.df <- data.frame(
-      time = ISOdatetime(1960,1,1,0,0,0) + sapply(fio$minutely$data,"[[","time"),
+      time = as.POSIXlt(sapply(fio$minutely$data,"[[","time"), origin="1970-01-01"),
       precipIntensity = sapply(fio$minutely$data,"[[","precipIntensity"),
       precipProbability = sapply(fio$minutely$data,"[[","precipProbability")
     )
