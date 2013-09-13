@@ -43,10 +43,10 @@ fio.forecast <- function(api.key, latitude, longitude, for.time) {
   # using RCurl's getURLContent() since it fully supports http or https
   if (missing(for.time)) {
     fio.json <- getURLContent(sprintf("https://api.forecast.io/forecast/%s/%s,%s",
-                                      api.key, my.latitude, my.longitude))
+                                      api.key, latitude, longitude))
   } else {
     fio.json <- getURLContent(sprintf("https://api.forecast.io/forecast/%s/%s,%s,%d",
-                                      api.key, my.latitude, my.longitude, for.time))
+                                      api.key, latitude, longitude, for.time))
   }
   
   # take the JSON blob we got from forecast.io and make an R list from it
