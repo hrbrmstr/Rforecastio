@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,23 +16,33 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Rforecastio</h1>
-        <p>Simple R interface to forecast.io weather data</p>
-
-        <p class="view"><a href="https://github.com/hrbrmstr/Rforecastio">View the Project on GitHub <small>hrbrmstr/Rforecastio</small></a></p>
-
+        <h1 class="header">Rforecastio</h1>
+        <p class="header">Simple R interface to forecast.io weather data</p>
 
         <ul>
-          <li><a href="https://github.com/hrbrmstr/Rforecastio/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/hrbrmstr/Rforecastio/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/hrbrmstr/Rforecastio">View On <strong>GitHub</strong></a></li>
+          <li class="download"><a class="buttons" href="https://github.com/hrbrmstr/Rforecastio/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/hrbrmstr/Rforecastio/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/hrbrmstr/Rforecastio">View On GitHub</a></li>
         </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/hrbrmstr">hrbrmstr</a></p>
+
+
       </header>
       <section>
         <h1>
 <a name="rforecastio" class="anchor" href="#rforecastio"><span class="octicon octicon-link"></span></a>Rforecastio</h1>
 
-<p>This is a simple R interface to forecast.io weather data. It uses <code>RCurl</code> and <code>RJSONIO</code> to fetch and extract the JSON weather/forecast data from <a href="http://forecast.io">http://forecast.io</a> and returns the metadata and readings</p>
+<p>v1.1.0 update:</p>
+
+<p>I've bumped up the version number of <code>Rforecastio</code> to <code>1.1.0</code>. The new features are:</p>
+
+<ul>
+<li>removing the SSL certificate bypass check (it doesn't need it anymore)</li>
+<li>using <code>plyr</code> for easier conversion of JSON-&gt;data frame</li>
+<li>adding in a new <code>daily</code> forecast data frame</li>
+<li>roxygen2 inline documentation (so the pkg docs are a bit better)</li>
+</ul><hr><p>This is a simple R interface to forecast.io weather data. It uses <code>RCurl</code> and <code>RJSONIO</code> and <code>plyr</code> to fetch and extract the JSON weather/forecast data from <a href="http://forecast.io">http://forecast.io</a> and returns the metadata and readings</p>
 
 <ul>
 <li>forecast.io API Docs: <a href="https://developer.forecast.io/docs/v2">https://developer.forecast.io/docs/v2</a>
@@ -46,26 +57,48 @@ install_github("Rforecastio", "hrbrmstr")
 
 <p>Usage quick start: </p>
 
-<pre><code>fio.api.key = readLines("~/.forecast.io")
+<pre><code>library(Rforecastio)
+library(ggplot2)
+library(plyr)
+
+# NEVER put API keys in revision control systems or source code!
+fio.api.key= readLines("~/.forecast.io")
 
 my.latitude = "43.2673"
 my.longitude = "-70.8618"
 
 fio.list &lt;- fio.forecast(fio.api.key, my.latitude, my.longitude)
+
+fio.gg &lt;- ggplot(data=fio.list$hourly.df, aes(x=time, y=temperature))
+fio.gg &lt;- fio.gg + labs(y="Readings", x="Time", title="Houry Readings")
+fio.gg &lt;- fio.gg + geom_line(aes(y=humidity*100), color="green")
+fio.gg &lt;- fio.gg + geom_line(aes(y=temperature), color="red")
+fio.gg &lt;- fio.gg + geom_line(aes(y=dewPoint), color="blue")
+fio.gg &lt;- fio.gg + theme_bw()
+fio.gg
 </code></pre>
 
-<p>See example usage in <code>examples/test.R</code></p>
+<p></p><img src="https://rud.is/b/wp-content/uploads/2014/05/daily-530x265.png" alt="hourly">
+
+<pre><code>fio.gg &lt;- ggplot(data=fio.list$daily.df, aes(x=time, y=temperature))
+fio.gg &lt;- fio.gg + labs(y="Readings", x="Time", title="Daily Readings")
+fio.gg &lt;- fio.gg + geom_line(aes(y=humidity*100), color="green")
+fio.gg &lt;- fio.gg + geom_line(aes(y=temperatureMax), color="red")
+fio.gg &lt;- fio.gg + geom_line(aes(y=temperatureMin), color="red", linetype=2)
+fio.gg &lt;- fio.gg + geom_line(aes(y=dewPoint), color="blue")
+fio.gg &lt;- fio.gg + theme_bw()
+fio.gg
+</code></pre>
+
+<p></p><img src="https://rud.is/b/wp-content/uploads/2014/05/hourly-530x265.png" alt="hourly">
 
 <p>Hit: <a href="http://rud.is/b/tag/rforecastio/">http://rud.is/b/tag/rforecastio/</a> occassionally to see if the blog has any more info (it will!)</p>
-
-<p><img src="https://raw.github.com/hrbrmstr/Rforecastio/master/examples/test.png" alt="sample of what you can do"></p>
       </section>
       <footer>
-        <p>This project is maintained by <a href="https://github.com/hrbrmstr">hrbrmstr</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
   </body>
 </html>
