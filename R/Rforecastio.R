@@ -66,7 +66,7 @@ fio.forecast <- function(api.key, latitude, longitude, for.time) {
   # extract daily forecast data
   fio.daily.df <-  ldply(fio$daily$data, data.frame)
   fio.daily.df$time <- as.POSIXlt(fio.daily.df$time, origin="1970-01-01")
-  fio.daily.df$sunsetTime <- as.POSIXlt(fio.daily.df$sunsetTime, origin="1970-01-01")
+  fio.daily.df$sunriseTime <- as.POSIXlt(fio.daily.df$sunriseTime, origin="1970-01-01")
   fio.daily.df$sunsetTime <- as.POSIXlt(fio.daily.df$sunsetTime, origin="1970-01-01")
   fio.daily.df$temperatureMinTime <- as.POSIXlt(fio.daily.df$temperatureMinTime, origin="1970-01-01")
   fio.daily.df$temperatureMaxTime <- as.POSIXlt(fio.daily.df$temperatureMaxTime, origin="1970-01-01")
