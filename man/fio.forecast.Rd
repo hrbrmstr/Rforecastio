@@ -1,51 +1,30 @@
 \name{fio.forecast}
 \alias{fio.forecast}
-\title{Retrieve forecast/readings from forecast.io}
+\title{obtain data from http://forecast.io}
 \usage{
-  fio.api.key = readLines("~/.forecast.io")
-  
-  my.latitude = "43.2673"
-  my.longitude = "-70.8618"
-  
-  fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude)
-  
-  # or for historical data + forecast
-  
-  fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude, 
-                           for.time=as.integer(Sys.time())-(60*60*6))
+fio.forecast(api.key, latitude, longitude, for.time)
 }
 \arguments{
-  \item{api.key}{Your forecast.io API key. (character)}
-  
-  \item{latitude}{Latitude for the forecast. (character)}
+  \item{api.key}{your forecast.io API key}
 
-  \item{longitude}{Longitude for the forecast. (character)}
+  \item{latitude}{forecast latitude (character, decimal
+  format)}
 
-  \item{for.time}{Optional specificaion (in unix timestamp format) for what date/time you want the forecast data for. (integer)}  
+  \item{longitude}{forecast longitude (character, decimal
+  format)}
+
+  \item{for.time}{unix timestamp if requesting history}
+}
+\value{
+a list of three named elements:\cr \itemize{ \item
+\code{json} which is the converted (to R object) JSON from
+forecast.io, which is great for extracting the metadata
+\item \code{hourly.df} which has the hourly
+readings/forecast \item \code{minutely.df} which is NULL if
+"for.time" was not used, otherwise will have the "minutely"
+forecast as a data frame }
 }
 \description{
-really simple R interface to forecast.io JSON data
+obtain data from http://forecast.io
 }
-\details{
- obtain data from http://forecast.io
 
- for just the forecat, pass in your:
-
- - forecast.io api key (character)
- - latitude (characeter)
- - longitude (character)
- 
- for history, pass the time (unix timestamp format) to for.time
-
- returns a list of three named elements:
-
- - "json" which is the converted (to R object) JSON from forecast.io,
-   which is great for extracting the metadata
-
- - "hourly.df" which has the hourly readings/forecast
-
- - "minutely.df" which is NULL if "for.time" was not used, otherwise will have
-   the "minutely" forecast as a data frame
-}
-\seealso{
-}

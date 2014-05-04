@@ -8,7 +8,7 @@ Simple R interface to forecast.io weather data
 \description{
 single function - fio.forecast() - that will return metadata and hourly/minutely (if avaialble) forecast info in data frames
 
-Ref: 
+Ref:
 
 - forecast.io API Docs: https://developer.forecast.io/docs/v2
 - forecast.io Dev site: https://developer.forecast.io/
@@ -17,7 +17,7 @@ Ref:
 \tabular{ll}{
 Package: \tab Rforecastio\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 1.0.1\cr
 Date: \tab 2013-09-08\cr
 License: \tab MIT\cr
 }
@@ -29,7 +29,7 @@ The one and only function is fio.forecast()
  - forecast.io api key (character)
  - latitude (characeter)
  - longitude (character)
- 
+
  for history, pass the time (unix timestamp format) to for.time
 
  returns a list of three named elements:
