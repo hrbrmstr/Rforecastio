@@ -1,11 +1,12 @@
 Package: Rforecastio
 Type: Package
 Title: Simple R interface to forecast.io weather data
-Version: 1.0.1
+Version: 1.1.0
 Depends:
     R (>= 2.1.4),
     RCurl,
-    RJSONIO
+    RJSONIO,
+    plyr
 Date: 2014-05-04
 Author: Bob Rudis (@hrbrmstr)
 Maintainer: <bob@rudis.net>
