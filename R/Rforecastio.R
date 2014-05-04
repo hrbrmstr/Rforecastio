@@ -76,11 +76,29 @@ fio.forecast <- function(api.key, latitude, longitude, for.time) {
 
   # 'minutely' only returns for current forecast
   if (missing(for.time)) {
-    # extract minutely forecast data
-    fio.minutely.df <- ldply(fio$minutely$data)
-    fio.minutely.df$time <- as.POSIXlt(fio.minutely.df$time, origin="1970-01-01")
+
+    # if "minutely" is in the return values
+    if ("minutely" %in% names(fio)) {
+
+      # extract minutely forecast data
+      # the structure returned has missing fields so we ahve to account for that
+      fio.minutely.df <- do.call("rbind.fill", lapply(d, function(x) {
+        if (typeof(x) == "list") {
+          return(data.frame(x))
+        } else {
+          tmp <- data.frame(rbind(x))
+        }
+      }))
+      fio.minutely.df$time <- as.POSIXlt(fio.minutely.df$time, origin="1970-01-01")
+
+    } else {
+      fio.minutely.df <- NULL
+    }
+
   } else {
+
     fio.minutely.df <- NULL
+
   }
 
   return(list(json=fio,

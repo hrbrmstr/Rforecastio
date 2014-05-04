@@ -1,14 +1,15 @@
 Rforecastio
 ===========
 
-v1.1.0 update:
+v1.1.1 update:
 
-I've bumped up the version number of `Rforecastio` to `1.1.0`. The new features are:
+I've bumped up the version number of `Rforecastio` to `1.1.1`. The new features are:
 
 - removing the SSL certificate bypass check (it doesn't need it anymore)
 - using `plyr` for easier conversion of JSON->data frame
-- adding in a new `daily` forecast data frame
+- adding in a new `daily.df` forecast data frame
 - roxygen2 inline documentation (so the pkg docs are a bit better)
+- the `minutely` conversion code now handles missing element properly
 
 *********
 
