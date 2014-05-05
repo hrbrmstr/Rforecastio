@@ -66,7 +66,7 @@ fio.forecast <- function(api.key, latitude, longitude, for.time, ...) {
 
   # extract hourly forecast data
   fio.hourly.df <- ldply(fio$hourly$data, data.frame)
-  fio.hourly.df$time <- as.POSIXlt(fio.hourly.df$time, origin="1970-01-01")
+  fio.hourly.df$time <- timely(fio.hourly.df$time, origin="1970-01-01")
 
   # extract daily forecast data
   fio.daily.df <-  ldply(fio$daily$data, data.frame)
