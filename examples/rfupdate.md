@@ -1,11 +1,14 @@
-I've bumped up the version number of `Rforecastio` to `1.1.0`. The new
+I've bumped up the version number of `Rforecastio` to `1.2.0`. The new
 features are:
 
--   removing the SSL certificate bypass check (it doesn't need it
-    anymore)
+-   added `...` to the `fio.forecast` function call to let users pass in
+    `ssl.verifypeer=FALSE` and `proxy="host:port"` options (any CURL
+    options, actually). h/t Stefan Fritsch
 -   using `plyr` for easier conversion of JSON-\>data frame
 -   adding in a new `daily` forecast data frame
 -   roxygen2 inline documentation
+-   fixed horrible bug in the package code that will finally teach me to
+    clear the environment before testing
 
 <!-- -->
 
@@ -19,25 +22,27 @@ features are:
     my.latitude = "43.2673"
     my.longitude = "-70.8618"
 
-    fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude, proxy='www-proxy.lmig.com:80')
+    # can add proxy='host:port' and ssl.verifypeer=FALSE to the end of the fio.forecast call
+
+    fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude)
 
     fio.gg <- ggplot(data=fio.list$hourly.df, aes(x=time, y=temperature))
-    fio.gg <- fio.gg + labs(y="Readings", x="Time", title="Houry Readings")
-    fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green")
-    fio.gg <- fio.gg + geom_line(aes(y=temperature), color="red")
-    fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue")
+    fio.gg <- fio.gg + labs(y="Readings", x="", title="Houry Readings")
+    fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green", size=0.25)
+    fio.gg <- fio.gg + geom_line(aes(y=temperature), color="red", size=0.25)
+    fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue", size=0.25)
     fio.gg <- fio.gg + theme_bw()
     fio.gg
 
-<img src="./rfupdate_files/figure-markdown_strict/daily.png" title="plot of chunk daily" alt="plot of chunk daily" style="display: block; margin: auto;" />
+![hourly](/examples/rfupdate_files/figure-markdown_strict/hourly.png)
 
     fio.gg <- ggplot(data=fio.list$daily.df, aes(x=time, y=temperature))
-    fio.gg <- fio.gg + labs(y="Readings", x="Time", title="Daily Readings")
-    fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green")
-    fio.gg <- fio.gg + geom_line(aes(y=temperatureMax), color="red")
-    fio.gg <- fio.gg + geom_line(aes(y=temperatureMin), color="red", linetype=2)
-    fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue")
+    fio.gg <- fio.gg + labs(y="Readings", x="", title="Daily Readings")
+    fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green", size=0.25)
+    fio.gg <- fio.gg + geom_line(aes(y=temperatureMax), color="red", size=0.25)
+    fio.gg <- fio.gg + geom_line(aes(y=temperatureMin), color="red", linetype=2, size=0.25)
+    fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue", size=0.25)
     fio.gg <- fio.gg + theme_bw()
     fio.gg
 
-<img src="./rfupdate_files/figure-markdown_strict/hourly.png" title="plot of chunk hourly" alt="plot of chunk hourly" style="display: block; margin: auto;" />
+![daily](/examples/rfupdate_files/figure-markdown_strict/daily.png)

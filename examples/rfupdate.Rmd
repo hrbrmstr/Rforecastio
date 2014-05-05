@@ -29,23 +29,23 @@ my.longitude = "-70.8618"
 fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude)
 ```
 
-```{r daily, fig.width=6, fig.height=3, fig.align='center'}
+```{r hourly, fig.width=6, fig.height=3, fig.cap="hourly", fig.retina=TRUE, fig.subcap="Hourly"}
 fio.gg <- ggplot(data=fio.list$hourly.df, aes(x=time, y=temperature))
-fio.gg <- fio.gg + labs(y="Readings", x="Time", title="Houry Readings")
-fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green")
-fio.gg <- fio.gg + geom_line(aes(y=temperature), color="red")
-fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue")
+fio.gg <- fio.gg + labs(y="Readings", x="", title="Houry Readings")
+fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green", size=0.25)
+fio.gg <- fio.gg + geom_line(aes(y=temperature), color="red", size=0.25)
+fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue", size=0.25)
 fio.gg <- fio.gg + theme_bw()
 fio.gg
 ```
 
-```{r hourly, fig.width=6, fig.height=3, fig.align='center'}
+```{r daily, fig.width=6, fig.height=3, fig.cap="daily", fig.retina=TRUE, fig.subcap="Daily"}
 fio.gg <- ggplot(data=fio.list$daily.df, aes(x=time, y=temperature))
-fio.gg <- fio.gg + labs(y="Readings", x="Time", title="Daily Readings")
-fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green")
-fio.gg <- fio.gg + geom_line(aes(y=temperatureMax), color="red")
-fio.gg <- fio.gg + geom_line(aes(y=temperatureMin), color="red", linetype=2)
-fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue")
+fio.gg <- fio.gg + labs(y="Readings", x="", title="Daily Readings")
+fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green", size=0.25)
+fio.gg <- fio.gg + geom_line(aes(y=temperatureMax), color="red", size=0.25)
+fio.gg <- fio.gg + geom_line(aes(y=temperatureMin), color="red", linetype=2, size=0.25)
+fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue", size=0.25)
 fio.gg <- fio.gg + theme_bw()
 fio.gg
 ```

@@ -38,30 +38,29 @@ Usage quick start:
     my.longitude = "-70.8618"
 
     # can add proxy='host:port' and ssl.verifypeer=FALSE to the end of the fio.forecast call
-    # if you need to run behind a proxy or still have certiifcate issues
-    
+
     fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude)
 
     fio.gg <- ggplot(data=fio.list$hourly.df, aes(x=time, y=temperature))
-    fio.gg <- fio.gg + labs(y="Readings", x="Time", title="Houry Readings")
-    fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green")
-    fio.gg <- fio.gg + geom_line(aes(y=temperature), color="red")
-    fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue")
+    fio.gg <- fio.gg + labs(y="Readings", x="", title="Houry Readings")
+    fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green", size=0.25)
+    fio.gg <- fio.gg + geom_line(aes(y=temperature), color="red", size=0.25)
+    fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue", size=0.25)
     fio.gg <- fio.gg + theme_bw()
     fio.gg
 
-![hourly](/examples/hourly.png)
+![hourly](/examples/rfupdate_files/figure-markdown_strict/hourly.png)
 
     fio.gg <- ggplot(data=fio.list$daily.df, aes(x=time, y=temperature))
-    fio.gg <- fio.gg + labs(y="Readings", x="Time", title="Daily Readings")
-    fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green")
-    fio.gg <- fio.gg + geom_line(aes(y=temperatureMax), color="red")
-    fio.gg <- fio.gg + geom_line(aes(y=temperatureMin), color="red", linetype=2)
-    fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue")
+    fio.gg <- fio.gg + labs(y="Readings", x="", title="Daily Readings")
+    fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green", size=0.25)
+    fio.gg <- fio.gg + geom_line(aes(y=temperatureMax), color="red", size=0.25)
+    fio.gg <- fio.gg + geom_line(aes(y=temperatureMin), color="red", linetype=2, size=0.25)
+    fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue", size=0.25)
     fio.gg <- fio.gg + theme_bw()
     fio.gg
-    
-![hourly](/examples/daily.png)
+
+![daily](/examples/rfupdate_files/figure-markdown_strict/daily.png)
 
 Hit: http://rud.is/b/tag/rforecastio/ occassionally to see if the blog has any more info (it will!)
 
