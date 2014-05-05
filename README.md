@@ -21,7 +21,7 @@ This is a simple R interface to forecast.io weather data. It uses `RCurl` and `R
 
 Install it from straight from github:
 
-    library("devtools")
+    library(devtools)
     install_github("Rforecastio", "hrbrmstr")
 
 
