@@ -3,7 +3,7 @@ Rforecastio
 
 v1.2.0 update:
 
-I've bumped up the version number of `Rforecastio` to `1.1.1`. The new features are:
+I've bumped up the version number of `Rforecastio` to `1.2.0`. The new features are:
 
 - fixed horrible bug in the package code that will finally teach me to clear the environment before testing
 - added `...` to the `fio.forecast` function call to let users pass in `ssl.verifypeer=FALSE` and `proxy="host:port"` options (any CURL options, actually). h/t Stefan Fritsch
