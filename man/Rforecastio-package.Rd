@@ -20,8 +20,8 @@ Ref:
 \tabular{ll}{
 Package: \tab Rforecastio\cr
 Type: \tab Package\cr
-Version: \tab 1.1.1\cr
-Date: \tab 2014-05-04\cr
+Version: \tab 1.2.0\cr
+Date: \tab 2014-05-05\cr
 License: \tab MIT\cr
 }
 

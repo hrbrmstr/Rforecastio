@@ -2,7 +2,7 @@
 \alias{fio.forecast}
 \title{obtain data from http://forecast.io}
 \usage{
-fio.forecast(api.key, latitude, longitude, for.time)
+fio.forecast(api.key, latitude, longitude, for.time, ...)
 }
 \arguments{
   \item{api.key}{your forecast.io API key}
@@ -15,6 +15,10 @@ fio.forecast(api.key, latitude, longitude, for.time)
 
   \item{for.time}{unix timestamp if requesting history
   (optional)}
+
+  \item{...}{named values that are interpreted as CURL
+  options governing the request (i.e. if you have SSL
+  certificate issues or need to use a proxy)}
 }
 \value{
 a list of three named elements:\cr \itemize{ \item

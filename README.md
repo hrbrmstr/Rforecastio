@@ -1,14 +1,15 @@
 Rforecastio
 ===========
 
-v1.1.1 update:
+v1.2.0 update:
 
 I've bumped up the version number of `Rforecastio` to `1.1.1`. The new features are:
 
-- removing the SSL certificate bypass check (it doesn't need it anymore)
+- fixed horrible bug in the package code that will finally teach me to clear the environment before testing
+- added `...` to the `fio.forecast` function call to let users pass in `ssl.verifypeer=FALSE` and `proxy="host:port"` options (any CURL options, actually). h/t Stefan Fritsch
 - using `plyr` for easier conversion of JSON->data frame
-- adding in a new `daily.df` forecast data frame
-- roxygen2 inline documentation (so the pkg docs are a bit better)
+- adding in a new `daily` forecast data frame
+- roxygen2 inline documentation
 - the `minutely` conversion code now handles missing element properly
 
 *********
@@ -36,6 +37,9 @@ Usage quick start:
     my.latitude = "43.2673"
     my.longitude = "-70.8618"
 
+    # can add proxy='host:port' and ssl.verifypeer=FALSE to the end of the fio.forecast call
+    # if you need to run behind a proxy or still have certiifcate issues
+    
     fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude)
 
     fio.gg <- ggplot(data=fio.list$hourly.df, aes(x=time, y=temperature))

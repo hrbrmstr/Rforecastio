@@ -1,16 +1,17 @@
 ---
-title: "Rforecastio Package Update (1.1.0)"
+title: "Rforecastio Package Update (1.2.0)"
 author: "Bob Rudis (@hrbrmstr)"
-date: "May 4, 2014"
+date: "May 5, 2014"
 output: md_document
 ---
 
-I've bumped up the version number of `Rforecastio` to `1.1.0`. The new features are:
+I've bumped up the version number of `Rforecastio` to `1.2.0`. The new features are:
 
-- removing the SSL certificate bypass check (it doesn't need it anymore)
+- added `...` to the `fio.forecast` function call to let users pass in `ssl.verifypeer=FALSE` and `proxy="host:port"` options (any CURL options, actually). h/t Stefan Fritsch
 - using `plyr` for easier conversion of JSON->data frame
 - adding in a new `daily` forecast data frame
 - roxygen2 inline documentation
+- fixed horrible bug in the package code that will finally teach me to clear the environment before testing
 
 ```{r message=FALSE, error=FALSE, warning=FALSE}
 library(Rforecastio)
@@ -22,6 +23,8 @@ fio.api.key= readLines("~/.forecast.io")
 
 my.latitude = "43.2673"
 my.longitude = "-70.8618"
+
+# can add proxy='host:port' and ssl.verifypeer=FALSE to the end of the fio.forecast call
 
 fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude)
 ```

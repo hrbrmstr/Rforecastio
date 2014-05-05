@@ -21,6 +21,7 @@ require(plyr)
 #' @param latitude forecast latitude (character, decimal format)
 #' @param longitude forecast longitude (character, decimal format)
 #' @param for.time unix timestamp if requesting history (optional)
+#' @param ... named values that are interpreted as CURL options governing the request (i.e. if you have SSL certificate issues or need to use a proxy)
 #' @export
 #' @return a list of three named elements:\cr
 #' \itemize{
@@ -45,15 +46,19 @@ require(plyr)
 #' fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude, for.time=as.integer(Sys.time())-(60*60*6))
 #' }
 #'
-fio.forecast <- function(api.key, latitude, longitude, for.time) {
+fio.forecast <- function(api.key, latitude, longitude, for.time, ...) {
 
   # using RCurl's getURLContent() since it fully supports http or https
   if (missing(for.time)) {
-    fio.json <- getURLContent(sprintf("https://api.forecast.io/forecast/%s/%s,%s",
-                                      api.key, latitude, longitude))
+    fio.json <- getURLContent(url=sprintf("https://api.forecast.io/forecast/%s/%s,%s",
+                                      api.key, latitude, longitude), ...)
   } else {
-    fio.json <- getURLContent(sprintf("https://api.forecast.io/forecast/%s/%s,%s,%d",
-                                      api.key, latitude, longitude, for.time))
+    fio.json <- getURLContent(url=sprintf("https://api.forecast.io/forecast/%s/%s,%s,%d",
+                                      api.key, latitude, longitude, for.time), ...)
+  }
+
+  if (class(fio.json) == "raw") {
+    fio.json <- rawToChar(fio.json)
   }
 
   # take the JSON blob we got from forecast.io and make an R list from it
@@ -65,14 +70,14 @@ fio.forecast <- function(api.key, latitude, longitude, for.time) {
 
   # extract daily forecast data
   fio.daily.df <-  ldply(fio$daily$data, data.frame)
-  fio.daily.df$time <- as.POSIXlt(fio.daily.df$time, origin="1970-01-01")
-  fio.daily.df$sunriseTime <- as.POSIXlt(fio.daily.df$sunriseTime, origin="1970-01-01")
-  fio.daily.df$sunsetTime <- as.POSIXlt(fio.daily.df$sunsetTime, origin="1970-01-01")
-  fio.daily.df$temperatureMinTime <- as.POSIXlt(fio.daily.df$temperatureMinTime, origin="1970-01-01")
-  fio.daily.df$temperatureMaxTime <- as.POSIXlt(fio.daily.df$temperatureMaxTime, origin="1970-01-01")
-  fio.daily.df$apparentTemperatureMinTime <- as.POSIXlt(fio.daily.df$apparentTemperatureMinTime, origin="1970-01-01")
-  fio.daily.df$apparentTemperatureMaxTime <- as.POSIXlt(fio.daily.df$apparentTemperatureMaxTime, origin="1970-01-01")
-  fio.daily.df$precipIntensityMaxTime <- as.POSIXlt(fio.daily.df$precipIntensityMaxTime, origin="1970-01-01")
+  fio.daily.df$time <- timely(fio.daily.df$time, origin="1970-01-01")
+  fio.daily.df$sunriseTime <- timely(fio.daily.df$sunriseTime, origin="1970-01-01")
+  fio.daily.df$sunsetTime <- timely(fio.daily.df$sunsetTime, origin="1970-01-01")
+  fio.daily.df$temperatureMinTime <- timely(fio.daily.df$temperatureMinTime, origin="1970-01-01")
+  fio.daily.df$temperatureMaxTime <- timely(fio.daily.df$temperatureMaxTime, origin="1970-01-01")
+  fio.daily.df$apparentTemperatureMinTime <- timely(fio.daily.df$apparentTemperatureMinTime, origin="1970-01-01")
+  fio.daily.df$apparentTemperatureMaxTime <- timely(fio.daily.df$apparentTemperatureMaxTime, origin="1970-01-01")
+  fio.daily.df$precipIntensityMaxTime <- timely(fio.daily.df$precipIntensityMaxTime, origin="1970-01-01")
 
   # 'minutely' only returns for current forecast
   if (missing(for.time)) {
@@ -82,14 +87,14 @@ fio.forecast <- function(api.key, latitude, longitude, for.time) {
 
       # extract minutely forecast data
       # the structure returned has missing fields so we ahve to account for that
-      fio.minutely.df <- do.call("rbind.fill", lapply(d, function(x) {
+      fio.minutely.df <- do.call("rbind.fill", lapply(fio$minutely$data, function(x) {
         if (typeof(x) == "list") {
           return(data.frame(x))
         } else {
           tmp <- data.frame(rbind(x))
         }
       }))
-      fio.minutely.df$time <- as.POSIXlt(fio.minutely.df$time, origin="1970-01-01")
+      fio.minutely.df$time <- timely(fio.minutely.df$time, origin="1970-01-01")
 
     } else {
       fio.minutely.df <- NULL
@@ -107,3 +112,7 @@ fio.forecast <- function(api.key, latitude, longitude, for.time) {
               minutely.df=fio.minutely.df))
 
 }
+
+# added this via Stefan Fritsch
+timely <- function(x, ...) if(!is.null(x)) as.POSIXlt(x, ...) else NULL
+
