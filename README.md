@@ -4,7 +4,7 @@ Rforecastio
 I've bumped up the version number of `Rforecastio` to `1.3.0`. The new
 feature is:
 
--   added support for `time.function` parameter so you can specify
+-   added support for `time.formatter` parameter so you can specify
     either `as.POSIXlt` or `as.POSIXct` as a parameter (defaults to
     `as.POSIXlt`)
 
