@@ -1,8 +1,9 @@
 \name{fio.forecast}
 \alias{fio.forecast}
-\title{obtain data from http://forecast.io}
+\title{Obtain data from \url{http://forecast.io}}
 \usage{
-fio.forecast(api.key, latitude, longitude, for.time, ...)
+fio.forecast(api.key, latitude, longitude, for.time,
+  time.formatter = as.POSIXlt, ...)
 }
 \arguments{
   \item{api.key}{your forecast.io API key}
@@ -13,25 +14,27 @@ fio.forecast(api.key, latitude, longitude, for.time, ...)
   \item{longitude}{forecast longitude (character, decimal
   format)}
 
-  \item{for.time}{unix timestamp if requesting history
+  \item{for.time}{Unix timestamp if requesting history
   (optional)}
+
+  \item{time.formatter}{specify \code{as.POSIXct} or
+  \code{as.POSIXlt} (defaults to \code{as.POSIXlt})}
 
   \item{...}{named values that are interpreted as CURL
   options governing the request (i.e. if you have SSL
   certificate issues or need to use a proxy)}
 }
 \value{
-a list of three named elements:\cr \itemize{ \item
-\code{json} which is the converted (to R object) JSON from
-forecast.io, which is great for extracting the metadata
-\item \code{hourly.df} which has the hourly
-readings/forecast \item \code{daily.df} which has the daily
-summary/forecast \item \code{minutely.df} which is NULL if
-"for.time" was not used, otherwise will have the "minutely"
-forecast as a data frame }
+a list of four named elements:
+\itemize{
+  \item{\code{json}}{ which is the converted (to R object) JSON from forecast.io, which is great for extracting the metadata}
+  \item{\code{hourly.df}}{ which has the hourly readings/forecast}
+  \item{\code{daily.df}}{ which has the daily summary/forecast}
+  \item{\code{minutely.df}}{ which is \code{NULL} if \code{for.time} was not used, otherwise will have the "minutely" forecast as a data frame}
+}
 }
 \description{
-obtain data from http://forecast.io
+Obtain data from \url{http://forecast.io}
 }
 \examples{
 \dontrun{

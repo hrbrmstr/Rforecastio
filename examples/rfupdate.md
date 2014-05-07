@@ -1,5 +1,13 @@
-I've bumped up the version number of `Rforecastio` to `1.2.0`. The new
-features are:
+I've bumped up the version number of `Rforecastio` to `1.3.0`. The new
+feature is:
+
+-   added support for `time.function` parameter so you can specify
+    either `as.POSIXlt` or `as.POSIXct` as a parameter (defaults to
+    `as.POSIXlt`)
+
+**VERSION HISTORY**
+
+Version 1.2.0:
 
 -   added `...` to the `fio.forecast` function call to let users pass in
     `ssl.verifypeer=FALSE` and `proxy="host:port"` options (any CURL
@@ -24,7 +32,7 @@ features are:
 
     # can add proxy='host:port' and ssl.verifypeer=FALSE to the end of the fio.forecast call
 
-    fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude)
+    fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude, time.formatter=as.POSIXct)
 
     fio.gg <- ggplot(data=fio.list$hourly.df, aes(x=time, y=temperature))
     fio.gg <- fio.gg + labs(y="Readings", x="", title="Houry Readings")
@@ -34,7 +42,7 @@ features are:
     fio.gg <- fio.gg + theme_bw()
     fio.gg
 
-![hourly](/examples/rfupdate_files/figure-markdown_strict/hourly.png)
+![hourly](./rfupdate_files/figure-markdown_strict/hourly.png)
 
     fio.gg <- ggplot(data=fio.list$daily.df, aes(x=time, y=temperature))
     fio.gg <- fio.gg + labs(y="Readings", x="", title="Daily Readings")
@@ -45,4 +53,4 @@ features are:
     fio.gg <- fio.gg + theme_bw()
     fio.gg
 
-![daily](/examples/rfupdate_files/figure-markdown_strict/daily.png)
+![daily](./rfupdate_files/figure-markdown_strict/daily.png)

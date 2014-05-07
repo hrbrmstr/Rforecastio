@@ -1,1 +1,4 @@
 export(fio.forecast)
+import(RCurl)
+import(RJSONIO)
+import(plyr)

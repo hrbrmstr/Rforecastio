@@ -15,20 +15,22 @@ require(RJSONIO)
 require(RCurl)
 require(plyr)
 
-#' obtain data from http://forecast.io
+#' Obtain data from \url{http://forecast.io}
 #'
 #' @param api.key your forecast.io API key
 #' @param latitude forecast latitude (character, decimal format)
 #' @param longitude forecast longitude (character, decimal format)
-#' @param for.time unix timestamp if requesting history (optional)
+#' @param for.time Unix timestamp if requesting history (optional)
+#' @param time.formatter specify \code{as.POSIXct} or \code{as.POSIXlt} (defaults to \code{as.POSIXlt})
 #' @param ... named values that are interpreted as CURL options governing the request (i.e. if you have SSL certificate issues or need to use a proxy)
+#' @import plyr RCurl RJSONIO
 #' @export
-#' @return a list of three named elements:\cr
+#' @return a list of four named elements:
 #' \itemize{
-#' \item \code{json} which is the converted (to R object) JSON from forecast.io, which is great for extracting the metadata
-#' \item \code{hourly.df} which has the hourly readings/forecast
-#' \item \code{daily.df} which has the daily summary/forecast
-#' \item \code{minutely.df} which is NULL if "for.time" was not used, otherwise will have the "minutely" forecast as a data frame
+#'   \item{\code{json}}{ which is the converted (to R object) JSON from forecast.io, which is great for extracting the metadata}
+#'   \item{\code{hourly.df}}{ which has the hourly readings/forecast}
+#'   \item{\code{daily.df}}{ which has the daily summary/forecast}
+#'   \item{\code{minutely.df}}{ which is \code{NULL} if \code{for.time} was not used, otherwise will have the "minutely" forecast as a data frame}
 #' }
 #' @examples
 #' \dontrun{
@@ -46,7 +48,7 @@ require(plyr)
 #' fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude, for.time=as.integer(Sys.time())-(60*60*6))
 #' }
 #'
-fio.forecast <- function(api.key, latitude, longitude, for.time, ...) {
+fio.forecast <- function(api.key, latitude, longitude, for.time, time.formatter=as.POSIXlt, ...) {
 
   # using RCurl's getURLContent() since it fully supports http or https
   if (missing(for.time)) {
@@ -66,18 +68,18 @@ fio.forecast <- function(api.key, latitude, longitude, for.time, ...) {
 
   # extract hourly forecast data
   fio.hourly.df <- ldply(fio$hourly$data, data.frame)
-  fio.hourly.df$time <- timely(fio.hourly.df$time, origin="1970-01-01")
+  fio.hourly.df$time <- timely(time.formatter, fio.hourly.df$time, origin="1970-01-01")
 
   # extract daily forecast data
   fio.daily.df <-  ldply(fio$daily$data, data.frame)
-  fio.daily.df$time <- timely(fio.daily.df$time, origin="1970-01-01")
-  fio.daily.df$sunriseTime <- timely(fio.daily.df$sunriseTime, origin="1970-01-01")
-  fio.daily.df$sunsetTime <- timely(fio.daily.df$sunsetTime, origin="1970-01-01")
-  fio.daily.df$temperatureMinTime <- timely(fio.daily.df$temperatureMinTime, origin="1970-01-01")
-  fio.daily.df$temperatureMaxTime <- timely(fio.daily.df$temperatureMaxTime, origin="1970-01-01")
-  fio.daily.df$apparentTemperatureMinTime <- timely(fio.daily.df$apparentTemperatureMinTime, origin="1970-01-01")
-  fio.daily.df$apparentTemperatureMaxTime <- timely(fio.daily.df$apparentTemperatureMaxTime, origin="1970-01-01")
-  fio.daily.df$precipIntensityMaxTime <- timely(fio.daily.df$precipIntensityMaxTime, origin="1970-01-01")
+  fio.daily.df$time <- timely(time.formatter, fio.daily.df$time, origin="1970-01-01")
+  fio.daily.df$sunriseTime <- timely(time.formatter, fio.daily.df$sunriseTime, origin="1970-01-01")
+  fio.daily.df$sunsetTime <- timely(time.formatter, fio.daily.df$sunsetTime, origin="1970-01-01")
+  fio.daily.df$temperatureMinTime <- timely(time.formatter, fio.daily.df$temperatureMinTime, origin="1970-01-01")
+  fio.daily.df$temperatureMaxTime <- timely(time.formatter, fio.daily.df$temperatureMaxTime, origin="1970-01-01")
+  fio.daily.df$apparentTemperatureMinTime <- timely(time.formatter, fio.daily.df$apparentTemperatureMinTime, origin="1970-01-01")
+  fio.daily.df$apparentTemperatureMaxTime <- timely(time.formatter, fio.daily.df$apparentTemperatureMaxTime, origin="1970-01-01")
+  fio.daily.df$precipIntensityMaxTime <- timely(time.formatter, fio.daily.df$precipIntensityMaxTime, origin="1970-01-01")
 
   # 'minutely' only returns for current forecast
   if (missing(for.time)) {
@@ -94,7 +96,7 @@ fio.forecast <- function(api.key, latitude, longitude, for.time, ...) {
           tmp <- data.frame(rbind(x))
         }
       }))
-      fio.minutely.df$time <- timely(fio.minutely.df$time, origin="1970-01-01")
+      fio.minutely.df$time <- timely(time.formatter, fio.minutely.df$time, origin="1970-01-01")
 
     } else {
       fio.minutely.df <- NULL
@@ -114,5 +116,8 @@ fio.forecast <- function(api.key, latitude, longitude, for.time, ...) {
 }
 
 # added this via Stefan Fritsch
-timely <- function(x, ...) if(!is.null(x)) as.POSIXlt(x, ...) else NULL
+timely <- function(time.formatter, x, ...) {
+  if (!is.function(time.formatter)) stop("time.formatter is not a function.")
+  if (!is.null(x)) time.formatter(x, ...) else NULL
+}
 

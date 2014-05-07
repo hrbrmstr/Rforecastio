@@ -20,8 +20,8 @@ Ref:
 \tabular{ll}{
 Package: \tab Rforecastio\cr
 Type: \tab Package\cr
-Version: \tab 1.2.0\cr
-Date: \tab 2014-05-05\cr
+Version: \tab 1.3.0\cr
+Date: \tab 2014-05-06\cr
 License: \tab MIT\cr
 }
 
@@ -37,24 +37,22 @@ The one and only function is fio.forecast()
 
  for history, pass the time (unix timestamp format) to \code{for.time}
 
+ to usea different time conversion function, specify \code{as.POSIXct} or \code{as.POSIXlt} (defaults to \code{as.POSIXlt}) in \code{time.formatter}
+
  returns a list of four named elements:
 
 \itemize{
 \item \code{json} which is the converted (to R object) JSON from forecast.io, which is great for extracting the metadata
 \item \code{hourly.df} which has the hourly readings/forecast
 \item \code{daily.df} which has the daily summary/forecast
-\item \code{minutely.df} which is NULL if "for.time" was not used, otherwise will have the "minutely" forecast as a data frame
+\item \code{minutely.df} which is \code{NULL} if \code{for.time} was not used, otherwise will have the "minutely" forecast as a data frame
 }
 
 }
 \author{
 Maintainer: Bob Rudis <bob@rudis..net>
 }
-\references{
-}
 \keyword{ package }
-\seealso{
-}
 \examples{
 \dontrun{
 # NEVER put API keys in revision control systems or source code!

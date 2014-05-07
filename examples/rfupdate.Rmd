@@ -1,11 +1,17 @@
 ---
-title: "Rforecastio Package Update (1.2.0)"
+title: "Rforecastio Package Update (1.3.0)"
 author: "Bob Rudis (@hrbrmstr)"
-date: "May 5, 2014"
+date: "May 6, 2014"
 output: md_document
 ---
 
-I've bumped up the version number of `Rforecastio` to `1.2.0`. The new features are:
+I've bumped up the version number of `Rforecastio` to `1.3.0`. The new feature is:
+
+- added support for `time.function` parameter so you can specify either `as.POSIXlt` or `as.POSIXct` as a parameter (defaults to `as.POSIXlt`)
+
+**VERSION HISTORY**
+
+Version 1.2.0:
 
 - added `...` to the `fio.forecast` function call to let users pass in `ssl.verifypeer=FALSE` and `proxy="host:port"` options (any CURL options, actually). h/t Stefan Fritsch
 - using `plyr` for easier conversion of JSON->data frame
@@ -26,10 +32,10 @@ my.longitude = "-70.8618"
 
 # can add proxy='host:port' and ssl.verifypeer=FALSE to the end of the fio.forecast call
 
-fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude)
+fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude, time.formatter=as.POSIXct)
 ```
 
-```{r hourly, fig.width=6, fig.height=3, fig.cap="hourly", fig.retina=TRUE, fig.subcap="Hourly"}
+```{r hourly, fig.width=6, fig.height=3, fig.cap="hourly", fig.subcap="Hourly"}
 fio.gg <- ggplot(data=fio.list$hourly.df, aes(x=time, y=temperature))
 fio.gg <- fio.gg + labs(y="Readings", x="", title="Houry Readings")
 fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green", size=0.25)
@@ -39,7 +45,7 @@ fio.gg <- fio.gg + theme_bw()
 fio.gg
 ```
 
-```{r daily, fig.width=6, fig.height=3, fig.cap="daily", fig.retina=TRUE, fig.subcap="Daily"}
+```{r daily, fig.width=6, fig.height=3, fig.cap="daily", fig.subcap="Daily"}
 fio.gg <- ggplot(data=fio.list$daily.df, aes(x=time, y=temperature))
 fio.gg <- fio.gg + labs(y="Readings", x="", title="Daily Readings")
 fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green", size=0.25)
