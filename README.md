@@ -48,10 +48,10 @@ Usage quick start:
 
     # can add proxy='host:port' and ssl.verifypeer=FALSE to the end of the fio.forecast call
 
-    fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude)
+    fio.list <- fio.forecast(fio.api.key, my.latitude, my.longitude, sslverifypeer=FALSE)
 
     fio.gg <- ggplot(data=fio.list$hourly.df, aes(x=time, y=temperature))
-    fio.gg <- fio.gg + labs(y="Readings", x="", title="Houry Readings")
+    fio.gg <- fio.gg + labs(y="Readings", x="", title="Hourly Readings")
     fio.gg <- fio.gg + geom_line(aes(y=humidity*100), color="green", size=0.25)
     fio.gg <- fio.gg + geom_line(aes(y=temperature), color="red", size=0.25)
     fio.gg <- fio.gg + geom_line(aes(y=dewPoint), color="blue", size=0.25)
