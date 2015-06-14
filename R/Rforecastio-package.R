@@ -5,4 +5,7 @@
 #' @author Bob Rudis (@@hrbrmstr)
 #' @import dplyr
 #' @import httr
+#' @import grid
+#' @import gridExtra
+#' @import ggplot2
 NULL

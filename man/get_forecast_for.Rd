@@ -57,6 +57,6 @@ for more information.
 You must have \code{FORECASTIO_API_KEY} in you \code{.Renvion} file for this to work
 }
 \examples{
-tmp <- get_current_forecast_for(37.8267,-122.423, "2013-05-06T12:00:00-0400")
+tmp <- get_forecast_for(37.8267,-122.423, "2013-05-06T12:00:00-0400")
 }
 

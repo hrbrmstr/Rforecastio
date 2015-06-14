@@ -1,4 +1,3 @@
-
 #' Get or set FORECASTIO_API_KEY value
 #'
 #' The API wrapper functions in this package all rely on a ForecastIO API
@@ -9,7 +8,7 @@
 #' @param force force setting a new ForecastIO API key for the current environment?
 #' @return atomic character vector containing the ForecastIO API key
 #' @export
-forecastio_api_key <- function(force = FALSE, time.formatter=as.POSIXct, ...) {
+forecastio_api_key <- function(force = FALSE) {
 
   env <- Sys.getenv('FORECASTIO_API_KEY')
   if (!identical(env, "") && !force) return(env)
@@ -179,7 +178,7 @@ get_current_forecast <- function(latitude, longitude,
 #' @export
 #' @note You must have \code{FORECASTIO_API_KEY} in you \code{.Renvion} file for this to work
 #' @examples
-#' tmp <- get_current_forecast_for(37.8267,-122.423, "2013-05-06T12:00:00-0400")
+#' tmp <- get_forecast_for(37.8267,-122.423, "2013-05-06T12:00:00-0400")
 get_forecast_for <- function(latitude, longitude, timestamp,
                              units="us", language="en", exclude=NULL) {
 

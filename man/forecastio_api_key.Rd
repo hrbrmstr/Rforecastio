@@ -4,7 +4,7 @@
 \alias{forecastio_api_key}
 \title{Get or set FORECASTIO_API_KEY value}
 \usage{
-forecastio_api_key(force = FALSE, time.formatter = as.POSIXct, ...)
+forecastio_api_key(force = FALSE)
 }
 \arguments{
 \item{force}{force setting a new ForecastIO API key for the current environment?}

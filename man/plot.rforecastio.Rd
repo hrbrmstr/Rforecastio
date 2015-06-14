@@ -2,13 +2,13 @@
 % Please edit documentation in R/plot.R
 \name{plot.rforecastio}
 \alias{plot.rforecastio}
-\title{Plot method for rforecastio objects:}
+\title{Plot method for rforecastio xs:}
 \usage{
-\method{plot}{rforecastio}(object, ..., readings = c("hourly", "minutely",
+\method{plot}{rforecastio}(x, ..., readings = c("hourly", "minutely",
   "daily"))
 }
 \arguments{
-\item{object}{an rforecastio object}
+\item{x}{an rforecastio x}
 
 \item{readings}{specify which readings to plot. will plot all available by default}
 
@@ -18,6 +18,6 @@
 frame grob
 }
 \description{
-Uses ggplot2 & grid.arrange to produce graphs for rforecastio objects
+Uses ggplot2 & grid.arrange to produce graphs for rforecastio xs
 }
 
