@@ -1,10 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-.DS_Store
-.RData
-.Rhistory
-.gitignore
-examples/.DS_Store
-..Rcheck
-.Rproj.user
-.git
+^\.travis\.yml$
+^.*md$
+\.bower\.json
+\.bowerrc
+README_files

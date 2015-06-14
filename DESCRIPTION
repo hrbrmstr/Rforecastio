@@ -1,21 +1,23 @@
 Package: Rforecastio
 Type: Package
-Title: Simple R interface to forecast.io weather data
-Version: 1.3.0
-Depends:
-    R (>= 2.1.4),
-    RCurl,
-    RJSONIO,
-    plyr
-Imports:
-    plyr,
-    RJSONIO,
-    RCurl
-Roxygen: list(wrap = FALSE)
-Date: 2014-05-063
-Author: Bob Rudis (@hrbrmstr)
+Title: An R Client for the 'Forecast' API
+Version: 2.0.0
+Date: 2015-06-14
+Authors@R: c(person("Bob", "Rudis", email = "bob@rudis.net", role = c("aut", "cre")))
 Maintainer: Bob Rudis <bob@rudis.net>
-Description: Returns forecast metadata and hourly/minutely forecast information
-License: MIT
-URL: https://github.com/hrbrmstr/Rforecastio
+Description: Programmatic access to the 'Forecast' API <https://developer.forecast.io/docs/v2>,
+    which provides current or historical global weather conditions.
+URL: http://github.com/hrbrmstr/Rforecastio
+Suggests:
+    testthat
+Imports:
+    httr,
+    stringr,
+    dplyr,
+    grid,
+    gridExtra
+Depends:
+    R (>= 3.0.0),
+    ggplot2
+License: MIT + file LICENSE
 BugReports: https://github.com/hrbrmstr/Rforecastio/issues

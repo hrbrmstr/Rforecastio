@@ -1,0 +1,72 @@
+---
+title: "README"
+author: "Bob Rudis"
+date: "`r Sys.Date()`"
+output:
+  md_document:
+    variant: markdown_github
+---
+
+Rforecastio - API access to the [Forecast API](https://developer.forecast.io/docs/v2) from R.
+
+- Forecast API Docs: https://developer.forecast.io/docs/v2
+- Forecast Dev site: https://developer.forecast.io/
+
+**NOTE: THIS IS A MAJOR REWRITE OF THE INTERFACE**
+
+The following functions are implemented:
+
+- `forecastio_api_key` :	Get or set FORECASTIO_API_KEY value
+- `get_current_forecast` : Retrieve the current forecast (for the next week)
+- `get_forecast_for` : Retrieve weather data for a specific place/time
+- `plot.rforecastio` : Plot method for rforecastio objects
+
+There have been several major enhancements to the way this package works with the API. Also,
+the structures returned in the list are now classes as `rforecastio` objects (which afford the 
+use of an S3 plotting method) and the data frames are now `tbl_df` objects (so they work like
+regular data frames but get all the `dplyr` goodness, too).
+
+### News
+
+- Version 2.0.0 released - complete overhaul of the package
+
+### Installation
+
+```{r eval=FALSE}
+devtools::install_github("hrbrmstr/Rforecastio")
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, error=FALSE}
+options(width=120)
+```
+
+### Usage
+
+```{r}
+library(Rforecastio)
+
+# current verison
+packageVersion("Rforecastio")
+
+now <- get_current_forecast(43.2672, -70.8617)
+print(now$hourly)
+
+then <- get_forecast_for(43.2672, -70.8617, "2013-05-06T12:00:00-0400")
+print(then$daily)
+
+print(sprintf("You have used %s API calls.", then$`x-forecast-api-calls`))
+
+plot(now)
+```
+
+### Test Results
+
+```{r}
+library(Rforecastio)
+library(testthat)
+
+date()
+
+test_dir("tests/")
+```
+
