@@ -51,16 +51,16 @@ print(now$hourly)
     ## Source: local data frame [49 x 16]
     ## 
     ##                   time       summary                icon precipIntensity precipProbability temperature
-    ## 1  2015-06-14 18:00:00         Clear           clear-day               0                 0       70.68
-    ## 2  2015-06-14 19:00:00 Partly Cloudy   partly-cloudy-day               0                 0       68.18
-    ## 3  2015-06-14 20:00:00 Partly Cloudy   partly-cloudy-day               0                 0       65.44
-    ## 4  2015-06-14 21:00:00 Partly Cloudy partly-cloudy-night               0                 0       62.95
-    ## 5  2015-06-14 22:00:00 Partly Cloudy partly-cloudy-night               0                 0       61.56
-    ## 6  2015-06-14 23:00:00 Mostly Cloudy partly-cloudy-night               0                 0       60.64
-    ## 7  2015-06-15 00:00:00 Mostly Cloudy partly-cloudy-night               0                 0       59.53
-    ## 8  2015-06-15 01:00:00      Overcast              cloudy               0                 0       59.24
-    ## 9  2015-06-15 02:00:00      Overcast              cloudy               0                 0       58.79
-    ## 10 2015-06-15 03:00:00      Overcast              cloudy               0                 0       58.20
+    ## 1  2015-06-14 18:00:00         Clear           clear-day               0                 0       70.56
+    ## 2  2015-06-14 19:00:00 Partly Cloudy   partly-cloudy-day               0                 0       67.76
+    ## 3  2015-06-14 20:00:00 Partly Cloudy   partly-cloudy-day               0                 0       64.87
+    ## 4  2015-06-14 21:00:00 Partly Cloudy partly-cloudy-night               0                 0       62.43
+    ## 5  2015-06-14 22:00:00 Partly Cloudy partly-cloudy-night               0                 0       61.31
+    ## 6  2015-06-14 23:00:00 Mostly Cloudy partly-cloudy-night               0                 0       60.44
+    ## 7  2015-06-15 00:00:00 Mostly Cloudy partly-cloudy-night               0                 0       59.35
+    ## 8  2015-06-15 01:00:00      Overcast              cloudy               0                 0       59.03
+    ## 9  2015-06-15 02:00:00      Overcast              cloudy               0                 0       58.60
+    ## 10 2015-06-15 03:00:00      Overcast              cloudy               0                 0       58.13
     ## ..                 ...           ...                 ...             ...               ...         ...
     ## Variables not shown: apparentTemperature (dbl), dewPoint (dbl), humidity (dbl), windSpeed (dbl), windBearing (int),
     ##   visibility (dbl), cloudCover (dbl), pressure (dbl), ozone (dbl), precipType (chr)
@@ -83,7 +83,7 @@ print(then$daily)
 print(sprintf("You have used %s API calls.", then$`x-forecast-api-calls`))
 ```
 
-    ## [1] "You have used 27 API calls."
+    ## [1] "You have used 33 API calls."
 
 ``` r
 plot(now)
@@ -100,10 +100,10 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Sun Jun 14 18:24:34 2015"
+    ## [1] "Sun Jun 14 18:36:21 2015"
 
 ``` r
 test_dir("tests/")
 ```
 
-    ## basic functionality :
+    ## basic functionality : ..
