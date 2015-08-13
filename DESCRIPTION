@@ -1,7 +1,7 @@
 Package: Rforecastio
 Type: Package
 Title: An R Client for the 'Forecast' API
-Version: 2.0.1
+Version: 2.1.0
 Date: 2015-06-14
 Authors@R: c(person("Bob", "Rudis", email = "bob@rudis.net", role = c("aut", "cre")))
 Maintainer: Bob Rudis <bob@rudis.net>

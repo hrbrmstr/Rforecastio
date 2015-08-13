@@ -5,7 +5,7 @@
 \title{Retrieve weather data for a specific place/time}
 \usage{
 get_forecast_for(latitude, longitude, timestamp, units = "us",
-  language = "en", exclude = NULL)
+  language = "en", exclude = NULL, ...)
 }
 \arguments{
 \item{latitude}{forecast latitude (character, decimal format)}
@@ -29,6 +29,8 @@ reducing latency and saving cache space. This should be a comma-separated string
 \code{hourly}, \code{daily}, \code{alerts}, \code{flags}). Crafting a request with all of
 the above blocks excluded is exceedingly silly and not recommended. Setting this parameter
 to \code{NULL} (the default) does not exclude any parameters from the results.}
+
+\item{...}{pass through parameters to \code{httr::GET} (e.g. to configure ssl options or proxies)}
 }
 \value{
 an \code{rforecastio} object that contains the original JSON response object, a list

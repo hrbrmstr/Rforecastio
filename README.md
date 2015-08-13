@@ -20,6 +20,7 @@ There have been several major enhancements to the way this package works with th
 
 ### News
 
+-   Version 2.1.0 released - added `httr::GET` pass-through `...` parameter to salient functions
 -   Version 2.0.0 released - complete overhaul of the package
 -   Version 2.0.1 released - Did a check `--as-cran` and fixed *many* things invisible to the users of this package
 
@@ -49,22 +50,22 @@ now <- get_current_forecast(43.2672, -70.8617)
 print(now$hourly)
 ```
 
-    ## Source: local data frame [49 x 16]
+    ## Source: local data frame [49 x 15]
     ## 
-    ##                   time       summary                icon precipIntensity precipProbability temperature
-    ## 1  2015-06-14 19:00:00         Clear           clear-day          0.0000              0.00       67.91
-    ## 2  2015-06-14 20:00:00 Partly Cloudy   partly-cloudy-day          0.0000              0.00       64.85
-    ## 3  2015-06-14 21:00:00 Partly Cloudy partly-cloudy-night          0.0000              0.00       62.35
-    ## 4  2015-06-14 22:00:00 Partly Cloudy partly-cloudy-night          0.0000              0.00       61.18
-    ## 5  2015-06-14 23:00:00 Mostly Cloudy partly-cloudy-night          0.0000              0.00       60.37
-    ## 6  2015-06-15 00:00:00 Mostly Cloudy partly-cloudy-night          0.0000              0.00       59.34
-    ## 7  2015-06-15 01:00:00      Overcast              cloudy          0.0000              0.00       59.03
-    ## 8  2015-06-15 02:00:00      Overcast              cloudy          0.0000              0.00       58.60
-    ## 9  2015-06-15 03:00:00      Overcast              cloudy          0.0000              0.00       58.13
-    ## 10 2015-06-15 04:00:00      Overcast              cloudy          0.0037              0.08       57.72
-    ## ..                 ...           ...                 ...             ...               ...         ...
+    ##                   time       summary              icon precipIntensity precipProbability temperature
+    ## 1  2015-08-13 07:00:00         Clear         clear-day               0                 0       59.13
+    ## 2  2015-08-13 08:00:00         Clear         clear-day               0                 0       64.12
+    ## 3  2015-08-13 09:00:00         Clear         clear-day               0                 0       67.52
+    ## 4  2015-08-13 10:00:00         Clear         clear-day               0                 0       70.51
+    ## 5  2015-08-13 11:00:00         Clear         clear-day               0                 0       72.87
+    ## 6  2015-08-13 12:00:00         Clear         clear-day               0                 0       75.13
+    ## 7  2015-08-13 13:00:00         Clear         clear-day               0                 0       77.56
+    ## 8  2015-08-13 14:00:00 Partly Cloudy partly-cloudy-day               0                 0       79.03
+    ## 9  2015-08-13 15:00:00 Partly Cloudy partly-cloudy-day               0                 0       79.60
+    ## 10 2015-08-13 16:00:00 Partly Cloudy partly-cloudy-day               0                 0       79.01
+    ## ..                 ...           ...               ...             ...               ...         ...
     ## Variables not shown: apparentTemperature (dbl), dewPoint (dbl), humidity (dbl), windSpeed (dbl), windBearing (int),
-    ##   visibility (dbl), cloudCover (dbl), pressure (dbl), ozone (dbl), precipType (chr)
+    ##   visibility (dbl), cloudCover (dbl), pressure (dbl), ozone (dbl)
 
 ``` r
 then <- get_forecast_for(43.2672, -70.8617, "2013-05-06T12:00:00-0400")
@@ -84,7 +85,7 @@ print(then$daily)
 print(sprintf("You have used %s API calls.", then$`x-forecast-api-calls`))
 ```
 
-    ## [1] "You have used 70 API calls."
+    ## [1] "You have used 2 API calls."
 
 ``` r
 plot(now)
@@ -101,10 +102,13 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Sun Jun 14 19:11:19 2015"
+    ## [1] "Thu Aug 13 07:04:27 2015"
 
 ``` r
 test_dir("tests/")
 ```
 
-    ## basic functionality : ..
+    ## testthat results ========================================================================================================
+    ## OK: 2 SKIPPED: 0 FAILED: 0
+    ## 
+    ## DONE

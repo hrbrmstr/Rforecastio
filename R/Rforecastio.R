@@ -67,6 +67,7 @@ forecastio_api_key <- function(force = FALSE) {
 #'        to \code{NULL} (the default) does not exclude any parameters from the results.
 #' @param extend setting this parameter to \code{hourly} the API will return hourly data for the
 #'        next seven days, rather than the next two.
+#' @param ... pass through parameters to \code{httr::GET} (e.g. to configure ssl options or proxies)
 #' @return an \code{rforecastio} object that contains the original JSON response object, a list
 #'         of  named `tbl_df` `data.frame` objects corresponding to what was returned by the API and
 #'         relevant response headers (\code{cache-control}, \code{expires}, \code{x-forecast-api-calls},
@@ -77,7 +78,7 @@ forecastio_api_key <- function(force = FALSE) {
 #' tmp <- get_current_forecast(37.8267, -122.423)
 get_current_forecast <- function(latitude, longitude,
                                  units="us", language="en",
-                                 exclude=NULL, extend=NULL) {
+                                 exclude=NULL, extend=NULL, ...) {
 
   url <- sprintf("https://api.forecast.io/forecast/%s/%s,%s",
                  forecastio_api_key(), latitude, longitude)
@@ -87,7 +88,7 @@ get_current_forecast <- function(latitude, longitude,
   if (!is.null(exclude)) params$exclude <- exclude
   if (!is.null(extend)) params$extend <- extend
 
-  resp <- GET(url, query=params)
+  resp <- GET(url=url, query=params, ...)
   stop_for_status(resp)
 
   tmp <- content(resp, as="parsed")
@@ -175,12 +176,13 @@ get_current_forecast <- function(latitude, longitude,
 #'         of  named `tbl_df` `data.frame` objects corresponding to what was returned by the API and
 #'         relevant response headers (\code{cache-control}, \code{expires}, \code{x-forecast-api-calls},
 #'         \code{x-response-time}).
+#' @param ... pass through parameters to \code{httr::GET} (e.g. to configure ssl options or proxies)
 #' @export
 #' @note You must have \code{FORECASTIO_API_KEY} in you \code{.Renvion} file for this to work
 #' @examples
 #' tmp <- get_forecast_for(37.8267,-122.423, "2013-05-06T12:00:00-0400")
 get_forecast_for <- function(latitude, longitude, timestamp,
-                             units="us", language="en", exclude=NULL) {
+                             units="us", language="en", exclude=NULL, ...) {
 
   # see comments in get_current_forecast since I was too lazy to abstract out the
   # common bits
@@ -192,7 +194,7 @@ get_forecast_for <- function(latitude, longitude, timestamp,
 
   if (!is.null(exclude)) params$exclude <- exclude
 
-  resp <- GET(url, query=params)
+  resp <- GET(url=url, query=params, ...)
   stop_for_status(resp)
 
   tmp <- content(resp, as="parsed")

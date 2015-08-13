@@ -5,7 +5,7 @@
 \title{Retrieve the current forecast (for the next week)}
 \usage{
 get_current_forecast(latitude, longitude, units = "us", language = "en",
-  exclude = NULL, extend = NULL)
+  exclude = NULL, extend = NULL, ...)
 }
 \arguments{
 \item{latitude}{forecast latitude (character, decimal format)}
@@ -25,6 +25,8 @@ to \code{NULL} (the default) does not exclude any parameters from the results.}
 
 \item{extend}{setting this parameter to \code{hourly} the API will return hourly data for the
 next seven days, rather than the next two.}
+
+\item{...}{pass through parameters to \code{httr::GET} (e.g. to configure ssl options or proxies)}
 }
 \value{
 an \code{rforecastio} object that contains the original JSON response object, a list

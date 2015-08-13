@@ -35,6 +35,7 @@ regular data frames but get all the `dplyr` goodness, too).
 
 ### News
 
+- Version 2.1.0 released - added `httr::GET` pass-through `...` parameter to salient functions
 - Version 2.0.0 released - complete overhaul of the package
 - Version 2.0.1 released - Did a check `--as-cran` and fixed _many_ things invisible to the users of this package
 
