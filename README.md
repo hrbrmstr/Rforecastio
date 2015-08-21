@@ -43,29 +43,29 @@ library(Rforecastio)
 packageVersion("Rforecastio")
 ```
 
-    ## [1] '2.0.1'
+    ## [1] '2.1.0'
 
 ``` r
 now <- get_current_forecast(43.2672, -70.8617)
 print(now$hourly)
 ```
 
-    ## Source: local data frame [49 x 15]
+    ## Source: local data frame [49 x 16]
     ## 
-    ##                   time       summary              icon precipIntensity precipProbability temperature
-    ## 1  2015-08-13 07:00:00         Clear         clear-day               0                 0       59.13
-    ## 2  2015-08-13 08:00:00         Clear         clear-day               0                 0       64.12
-    ## 3  2015-08-13 09:00:00         Clear         clear-day               0                 0       67.52
-    ## 4  2015-08-13 10:00:00         Clear         clear-day               0                 0       70.51
-    ## 5  2015-08-13 11:00:00         Clear         clear-day               0                 0       72.87
-    ## 6  2015-08-13 12:00:00         Clear         clear-day               0                 0       75.13
-    ## 7  2015-08-13 13:00:00         Clear         clear-day               0                 0       77.56
-    ## 8  2015-08-13 14:00:00 Partly Cloudy partly-cloudy-day               0                 0       79.03
-    ## 9  2015-08-13 15:00:00 Partly Cloudy partly-cloudy-day               0                 0       79.60
-    ## 10 2015-08-13 16:00:00 Partly Cloudy partly-cloudy-day               0                 0       79.01
-    ## ..                 ...           ...               ...             ...               ...         ...
-    ## Variables not shown: apparentTemperature (dbl), dewPoint (dbl), humidity (dbl), windSpeed (dbl), windBearing (int),
-    ##   visibility (dbl), cloudCover (dbl), pressure (dbl), ozone (dbl)
+    ##                   time    summary   icon precipIntensity precipProbability precipType temperature apparentTemperature
+    ## 1  2015-08-21 08:00:00 Light Rain   rain          0.0365              0.71       rain       70.62               70.62
+    ## 2  2015-08-21 09:00:00   Overcast cloudy          0.0034              0.10       rain       71.70               71.70
+    ## 3  2015-08-21 10:00:00    Drizzle   rain          0.0075              0.23       rain       72.99               72.99
+    ## 4  2015-08-21 11:00:00   Overcast cloudy          0.0040              0.05       rain       74.44               74.44
+    ## 5  2015-08-21 12:00:00    Drizzle   rain          0.0074              0.20       rain       76.69               76.69
+    ## 6  2015-08-21 13:00:00 Light Rain   rain          0.0092              0.35       rain       79.71               79.71
+    ## 7  2015-08-21 14:00:00 Light Rain   rain          0.0141              0.45       rain       81.64               87.53
+    ## 8  2015-08-21 15:00:00 Light Rain   rain          0.0212              0.69       rain       81.19               86.58
+    ## 9  2015-08-21 16:00:00 Light Rain   rain          0.0469              0.81       rain       80.12               84.40
+    ## 10 2015-08-21 17:00:00 Light Rain   rain          0.0385              0.80       rain       78.61               78.61
+    ## ..                 ...        ...    ...             ...               ...        ...         ...                 ...
+    ## Variables not shown: dewPoint (dbl), humidity (dbl), windSpeed (dbl), windBearing (int), visibility (dbl), cloudCover
+    ##   (dbl), pressure (dbl), ozone (dbl)
 
 ``` r
 then <- get_forecast_for(43.2672, -70.8617, "2013-05-06T12:00:00-0400")
@@ -82,10 +82,64 @@ print(then$daily)
     ##   visibility (dbl), cloudCover (dbl), pressure (dbl)
 
 ``` r
+# getting data for more than one location
+
+more_than_one <- data.frame(loc=c("Maine", "Seattle"),
+                            lon=c(43.2672, 47.6097),
+                            lat=c(70.8617, 122.3331),
+                            when=c("2013-05-06T12:00:00-0400",
+                                   "2013-05-06T12:00:00-0400"),
+                            stringsAsFactors=FALSE)
+
+bigger_list <- mapply(get_forecast_for, 
+       more_than_one$lon, more_than_one$lat, more_than_one$when,
+       SIMPLIFY=FALSE)
+names(bigger_list) <- more_than_one$loc
+
+bigger_list$Seattle[[1]]
+```
+
+    ## Source: local data frame [24 x 13]
+    ## 
+    ##                   time       summary                icon precipType temperature apparentTemperature dewPoint humidity
+    ## 1  2013-05-06 12:00:00 Partly Cloudy partly-cloudy-night       rain       57.34               57.34    36.96     0.46
+    ## 2  2013-05-06 13:00:00         Clear         clear-night       rain       55.78               55.78    37.89     0.51
+    ## 3  2013-05-06 14:00:00         Clear         clear-night       rain       54.52               54.52    38.45     0.54
+    ## 4  2013-05-06 15:00:00 Partly Cloudy partly-cloudy-night       rain       53.33               53.33    38.50     0.57
+    ## 5  2013-05-06 16:00:00 Partly Cloudy partly-cloudy-night       rain       52.43               52.43    38.36     0.59
+    ## 6  2013-05-06 17:00:00 Partly Cloudy   partly-cloudy-day       rain       52.86               52.86    38.38     0.58
+    ## 7  2013-05-06 18:00:00 Mostly Cloudy   partly-cloudy-day       rain       55.25               55.25    38.42     0.53
+    ## 8  2013-05-06 19:00:00 Partly Cloudy   partly-cloudy-day       rain       58.97               58.97    38.10     0.46
+    ## 9  2013-05-06 20:00:00 Partly Cloudy   partly-cloudy-day       rain       63.02               63.02    37.66     0.39
+    ## 10 2013-05-06 21:00:00 Partly Cloudy   partly-cloudy-day       rain       67.49               67.49    37.57     0.33
+    ## ..                 ...           ...                 ...        ...         ...                 ...      ...      ...
+    ## Variables not shown: windSpeed (dbl), windBearing (int), visibility (dbl), cloudCover (dbl), pressure (dbl)
+
+``` r
+bigger_list$Maine[[1]]
+```
+
+    ## Source: local data frame [24 x 13]
+    ## 
+    ##                   time summary        icon precipType temperature apparentTemperature dewPoint humidity windSpeed
+    ## 1  2013-05-05 14:00:00   Clear clear-night       rain       53.29               53.29    35.65     0.51      3.41
+    ## 2  2013-05-05 15:00:00   Clear clear-night       rain       52.38               52.38    36.48     0.55      3.32
+    ## 3  2013-05-05 16:00:00   Clear clear-night       rain       51.25               51.25    40.43     0.66     13.00
+    ## 4  2013-05-05 17:00:00   Clear clear-night       rain       48.31               48.31    37.36     0.66      2.53
+    ## 5  2013-05-05 18:00:00   Clear clear-night       rain       50.96               50.96    38.04     0.61      2.05
+    ## 6  2013-05-05 19:00:00   Clear clear-night       rain       50.25               50.25    38.24     0.63      3.49
+    ## 7  2013-05-05 20:00:00   Clear clear-night       rain       48.85               48.36    36.79     0.63      3.01
+    ## 8  2013-05-05 21:00:00   Clear   clear-day       rain       55.50               55.50    41.43     0.59      3.97
+    ## 9  2013-05-05 22:00:00   Clear   clear-day       rain       61.63               61.63    41.26     0.47      1.12
+    ## 10 2013-05-05 23:00:00   Clear   clear-day       rain       61.24               61.24    39.30     0.44      2.82
+    ## ..                 ...     ...         ...        ...         ...                 ...      ...      ...       ...
+    ## Variables not shown: windBearing (int), visibility (dbl), cloudCover (dbl), pressure (dbl)
+
+``` r
 print(sprintf("You have used %s API calls.", then$`x-forecast-api-calls`))
 ```
 
-    ## [1] "You have used 2 API calls."
+    ## [1] "You have used 9 API calls."
 
 ``` r
 plot(now)
@@ -102,7 +156,7 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Thu Aug 13 07:04:27 2015"
+    ## [1] "Fri Aug 21 08:47:32 2015"
 
 ``` r
 test_dir("tests/")
