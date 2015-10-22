@@ -190,7 +190,7 @@ get_forecast_for <- function(latitude, longitude, timestamp,
   url <- sprintf("https://api.forecast.io/forecast/%s/%s,%s,%s",
                  forecastio_api_key(), latitude, longitude, timestamp)
 
-  params <- list(units=units, language=language)
+  params <- list(units=units, lang=language)
 
   if (!is.null(exclude)) params$exclude <- exclude
 
