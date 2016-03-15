@@ -7,7 +7,7 @@ Rforecastio - API access to the [Forecast API](https://developer.forecast.io/doc
 
 **NOTE: THIS IS A MAJOR REWRITE OF THE INTERFACE**
 
-One of the biggest changes (besides splitting one function into two) is that the API wrapper functions in this package all rely on a ForecastIO API key that now resides in the environment variable . The easiest way to get this into your environment is to set it in the `\code{.Renviron}` file in your home directory.
+One of the biggest changes (besides splitting one function into two) is that the API wrapper functions in this package all rely on a ForecastIO API key that now resides in the environment variable . The easiest way to get this into your environment is to set it in the `.Renviron` file in your home directory.
 
 The following functions are implemented:
 
