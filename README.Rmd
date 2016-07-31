@@ -1,25 +1,12 @@
 ---
-title: "README"
-author: "Bob Rudis"
-date: "`r Sys.Date()`"
-output:
-  md_document:
-    variant: markdown_github
+output: rmarkdown::github_document
 ---
 [![Build Status](https://travis-ci.org/hrbrmstr/Rforecastio.svg)](https://travis-ci.org/hrbrmstr/Rforecastio) 
 
-Rforecastio - API access to the [Forecast API](https://developer.forecast.io/docs/v2) from R.
+`Rforecastio` : Tools to Work with the 'Forecast' 'API'
 
 - Forecast API Docs: https://developer.forecast.io/docs/v2
 - Forecast Dev site: https://developer.forecast.io/
-
-**NOTE: THIS IS A MAJOR REWRITE OF THE INTERFACE**
-
-One of the biggest changes (besides splitting one function into two) is that the
-API wrapper functions in this package all rely on a ForecastIO API
-key that now resides in the environment variable \code{FORECASTIO_API_KEY}. The
-easiest way to get this into your environment is to set it in the `\code{.Renviron}` file in your
-home directory.
 
 The following functions are implemented:
 
@@ -27,6 +14,7 @@ The following functions are implemented:
 - `get_current_forecast` : Retrieve the current forecast (for the next week)
 - `get_forecast_for` : Retrieve weather data for a specific place/time
 - `plot.rforecastio` : Plot method for rforecastio objects
+- `print.rforecastio` : A tad more human readable default printing
 
 There have been several major enhancements to the way this package works with the API. Also,
 the structures returned in the list are now classes as `rforecastio` objects (which afford the 
@@ -35,6 +23,7 @@ regular data frames but get all the `dplyr` goodness, too).
 
 ### News
 
+- 2.2.0 - `print()` method, made JSON & headers optional in respons object, smarter printing
 - Version 2.1.1 released - fix "language" parameter per #9
 - Version 2.1.0 released - added `httr::GET` pass-through `...` parameter to salient functions
 - Version 2.0.0 released - complete overhaul of the package
@@ -59,10 +48,10 @@ library(Rforecastio)
 packageVersion("Rforecastio")
 
 now <- get_current_forecast(43.2672, -70.8617)
-print(now$hourly)
+print(now)
 
-then <- get_forecast_for(43.2672, -70.8617, "2013-05-06T12:00:00-0400")
-print(then$daily)
+then <- get_forecast_for(43.2672, -70.8617, "2013-05-06T12:00:00-0400", add_headers=TRUE)
+print(then)
 
 # getting data for more than one location
 

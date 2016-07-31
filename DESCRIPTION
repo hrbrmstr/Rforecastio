@@ -1,12 +1,13 @@
 Package: Rforecastio
 Type: Package
-Title: An R Client for the 'Forecast' API
-Version: 2.1.1
-Date: 2015-06-14
+Title: Tools to Work with the 'Forecast' 'API'
+Version: 2.2.0
+Date: 2016-07-31
 Authors@R: c(person("Bob", "Rudis", email = "bob@rudis.net", role = c("aut", "cre")))
 Maintainer: Bob Rudis <bob@rudis.net>
-Description: Programmatic access to the 'Forecast' API <https://developer.forecast.io/docs/v2>,
-    which provides current or historical global weather conditions.
+Description: Programmatic access to the 'Forecast' API <https://
+    developer.forecast.io/docs/v2>, which provides current or historical global
+    weather conditions.
 URL: http://github.com/hrbrmstr/Rforecastio
 Suggests:
     testthat
@@ -14,9 +15,10 @@ Imports:
     httr,
     dplyr,
     grid,
-    gridExtra
-Depends:
-    R (>= 3.0.0),
+    gridExtra,
     ggplot2
+Depends:
+    R (>= 3.0.0)
 License: MIT + file LICENSE
 BugReports: https://github.com/hrbrmstr/Rforecastio/issues
+RoxygenNote: 5.0.1

@@ -1,29 +1,31 @@
-# silly CRAN
-
-temperature <- humidity <- precipIntensity <- temperatureMinTime <-
-  temperatureMin <- temperatureMaxTime <- temperatureMax <- NULL
-
 #' Plot method for rforecastio xs:
 #'
-#' Uses ggplot2 & grid.arrange to produce graphs for rforecastio xs
+#' Uses ggplot2 & grid.arrange to produce graphs for rforecastio objects
 #'
 #' @param x an rforecastio x
 #' @param \dots ignored
 #' @param readings specify which readings to plot. will plot all available by default
 #' @return frame grob
+#' @note only forecast/readings components of \code{x} that have more than one observation
+#'   will be plotted
 #' @export
 #' @method plot rforecastio
 plot.rforecastio <- function(x, ...,
                              readings=c("hourly", "minutely", "daily")) {
 
+  has <- intersect(readings, names(x))
+  rows <- sapply(has, function(y) nrow(x[[y]]))
+  has <- names(which(rows>1))
 
-  lapply(readings[readings %in% names(x)], function(rdng) {
+  lapply(has, function(rdng) {
 
     gg <- ggplot()
 
     if (rdng == "hourly") {
       gg <- gg + geom_line(data=x[[rdng]], aes(x=time, y=temperature, color="Temperature"))
-      gg <- gg + geom_line(data=x[[rdng]], aes(x=time, y=humidity*10, color="Humidity"))
+      if ("humidity" %in% colnames(x[[rdng]])) {
+        gg <- gg + geom_line(data=x[[rdng]], aes(x=time, y=humidity*10, color="Humidity"))
+      }
       gg <- gg + scale_color_manual(name="Readings", values=c("green", "red"))
 
     }
@@ -36,7 +38,9 @@ plot.rforecastio <- function(x, ...,
     if (rdng == "daily") {
       gg <- gg + geom_line(data=x[[rdng]], aes(x=temperatureMinTime, y=temperatureMin, color="Temp (min)"), linetype=2)
       gg <- gg + geom_line(data=x[[rdng]], aes(x=temperatureMaxTime, y=temperatureMax, color="Temp (max)"))
-      gg <- gg + geom_line(data=x[[rdng]], aes(x=time, y=humidity*100, color="Humidity"))
+      if ("humidity" %in% colnames(x[[rdng]])) {
+        gg <- gg + geom_line(data=x[[rdng]], aes(x=time, y=humidity*100, color="Humidity"))
+      }
       gg <- gg + scale_color_manual(name="Readings", values=c("green", "red", "red"))
     }
 
