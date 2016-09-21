@@ -5,8 +5,8 @@ output: rmarkdown::github_document
 
 `Rforecastio` : Tools to Work with the Dark Sky API
 
-- Forecast API Docs: https://darksky.net/dev/docs
-- Forecast Dev site: https://darksky.net/dev/
+- Dark Sky API Docs: https://darksky.net/dev/docs
+- Dark Sky Dev site: https://darksky.net/dev/
 
 The following functions are implemented:
 
@@ -16,14 +16,9 @@ The following functions are implemented:
 - `plot.rforecastio` : Plot method for rforecastio objects
 - `print.rforecastio` : A tad more human readable default printing
 
-There have been several major enhancements to the way this package works with the API. Also,
-the structures returned in the list are now classes as `rforecastio` objects (which afford the 
-use of an S3 plotting method) and the data frames are now `tbl_df` objects (so they work like
-regular data frames but get all the `dplyr` goodness, too).
-
 ### News
 
-- 2.3.0 - Fixed API URL (thx Lasse Vilhelmsen!)
+- 2.3.0 - Fixed API URL (thx Lasse Vilhelmsen)
 - 2.2.0 - `print()` method, made JSON & headers optional in respons object, smarter printing
 - Version 2.1.1 released - fix "language" parameter per #9
 - Version 2.1.0 released - added `httr::GET` pass-through `...` parameter to salient functions

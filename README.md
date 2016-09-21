@@ -3,8 +3,8 @@
 
 `Rforecastio` : Tools to Work with the Dark Sky API
 
--   Forecast API Docs: <https://darksky.net/dev/docs>
--   Forecast Dev site: <https://darksky.net/dev/>
+-   Dark Sky API Docs: <https://darksky.net/dev/docs>
+-   Dark Sky Dev site: <https://darksky.net/dev/>
 
 The following functions are implemented:
 
@@ -14,11 +14,9 @@ The following functions are implemented:
 -   `plot.rforecastio` : Plot method for rforecastio objects
 -   `print.rforecastio` : A tad more human readable default printing
 
-There have been several major enhancements to the way this package works with the API. Also, the structures returned in the list are now classes as `rforecastio` objects (which afford the use of an S3 plotting method) and the data frames are now `tbl_df` objects (so they work like regular data frames but get all the `dplyr` goodness, too).
-
 ### News
 
--   2.3.0 - Fixed API URL (thx Lasse Vilhelmsen!)
+-   2.3.0 - Fixed API URL (thx Lasse Vilhelmsen)
 -   2.2.0 - `print()` method, made JSON & headers optional in respons object, smarter printing
 -   Version 2.1.1 released - fix "language" parameter per \#9
 -   Version 2.1.0 released - added `httr::GET` pass-through `...` parameter to salient functions
@@ -51,7 +49,7 @@ print(now)
     ## ======================================================================================================================== 
     ## Observations: 61
     ## Variables: 3
-    ## $ time              <dttm> 2016-09-21 06:17:00, 2016-09-21 06:18:00, 2016-09-21 06:19:00, 2016-09-21 06:20:00, 2016...
+    ## $ time              <dttm> 2016-09-21 06:22:00, 2016-09-21 06:23:00, 2016-09-21 06:24:00, 2016-09-21 06:25:00, 2016...
     ## $ precipIntensity   <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
     ## $ precipProbability <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
     ## 
@@ -64,9 +62,9 @@ print(now)
     ## $ icon                <chr> "clear-night", "clear-day", "clear-day", "clear-day", "clear-day", "clear-day", "clear-...
     ## $ precipIntensity     <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
     ## $ precipProbability   <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
-    ## $ temperature         <dbl> 60.45, 61.04, 64.13, 68.18, 72.31, 75.73, 78.26, 80.47, 81.92, 82.34, 81.63, 79.48, 75....
-    ## $ apparentTemperature <dbl> 60.45, 61.04, 64.13, 68.18, 72.31, 75.73, 78.26, 80.37, 81.23, 81.46, 80.91, 79.48, 75....
-    ## $ dewPoint            <dbl> 57.17, 57.23, 58.11, 58.08, 57.35, 56.27, 55.12, 54.70, 54.21, 53.88, 53.33, 52.49, 51....
+    ## $ temperature         <dbl> 60.45, 61.02, 64.12, 68.17, 72.31, 75.73, 78.26, 80.47, 81.92, 82.34, 81.63, 79.48, 75....
+    ## $ apparentTemperature <dbl> 60.45, 61.02, 64.12, 68.17, 72.31, 75.73, 78.26, 80.37, 81.23, 81.46, 80.91, 79.48, 75....
+    ## $ dewPoint            <dbl> 57.17, 57.22, 58.10, 58.08, 57.34, 56.27, 55.12, 54.70, 54.21, 53.88, 53.33, 52.49, 51....
     ## $ humidity            <dbl> 0.89, 0.87, 0.81, 0.70, 0.59, 0.51, 0.45, 0.41, 0.39, 0.38, 0.38, 0.39, 0.43, 0.49, 0.5...
     ## $ windSpeed           <dbl> 5.50, 5.54, 5.98, 5.69, 5.95, 5.83, 5.14, 5.20, 5.27, 5.52, 5.79, 6.09, 4.70, 3.68, 3.4...
     ## $ windBearing         <int> 289, 296, 298, 303, 303, 300, 289, 277, 270, 267, 265, 264, 263, 259, 258, 257, 259, 26...
@@ -91,11 +89,11 @@ print(now)
     ## $ precipProbability          <dbl> 0.00, 0.00, 0.45, 0.00, 0.00, 0.00, 0.00, 0.17
     ## $ temperatureMin             <dbl> 60.45, 57.55, 52.51, 42.19, 38.67, 37.75, 37.23, 37.13
     ## $ temperatureMinTime         <dttm> 2016-09-21 06:00:00, 2016-09-22 05:00:00, 2016-09-23 23:00:00, 2016-09-24 23:00...
-    ## $ temperatureMax             <dbl> 82.34, 78.79, 76.26, 64.89, 57.91, 62.08, 60.06, 63.78
+    ## $ temperatureMax             <dbl> 82.34, 78.79, 76.26, 64.89, 57.91, 62.09, 60.06, 63.78
     ## $ temperatureMaxTime         <dttm> 2016-09-21 15:00:00, 2016-09-22 14:00:00, 2016-09-23 12:00:00, 2016-09-24 15:00...
     ## $ apparentTemperatureMin     <dbl> 60.45, 57.55, 52.51, 38.69, 34.63, 33.62, 35.05, 37.13
     ## $ apparentTemperatureMinTime <dttm> 2016-09-21 06:00:00, 2016-09-22 05:00:00, 2016-09-23 23:00:00, 2016-09-24 23:00...
-    ## $ apparentTemperatureMax     <dbl> 81.46, 78.79, 76.26, 64.89, 57.91, 62.08, 60.06, 63.78
+    ## $ apparentTemperatureMax     <dbl> 81.46, 78.79, 76.26, 64.89, 57.91, 62.09, 60.06, 63.78
     ## $ apparentTemperatureMaxTime <dttm> 2016-09-21 15:00:00, 2016-09-22 14:00:00, 2016-09-23 12:00:00, 2016-09-24 15:00...
     ## $ dewPoint                   <dbl> 55.47, 54.40, 53.39, 39.67, 33.36, 35.27, 35.13, 39.50
     ## $ humidity                   <dbl> 0.64, 0.65, 0.64, 0.63, 0.61, 0.64, 0.65, 0.68
@@ -112,23 +110,23 @@ print(now)
     ## ======================================================================================================================== 
     ## Observations: 1
     ## Variables: 17
-    ## $ time                 <dttm> 2016-09-21 06:17:38
+    ## $ time                 <dttm> 2016-09-21 06:22:17
     ## $ summary              <chr> "Clear"
     ## $ icon                 <chr> "clear-night"
     ## $ nearestStormDistance <int> 26
     ## $ nearestStormBearing  <int> 192
     ## $ precipIntensity      <int> 0
     ## $ precipProbability    <int> 0
-    ## $ temperature          <dbl> 60.62
-    ## $ apparentTemperature  <dbl> 60.62
+    ## $ temperature          <dbl> 60.66
+    ## $ apparentTemperature  <dbl> 60.66
     ## $ dewPoint             <dbl> 57.19
     ## $ humidity             <dbl> 0.88
     ## $ windSpeed            <dbl> 5.5
-    ## $ windBearing          <int> 291
-    ## $ visibility           <dbl> 9.14
+    ## $ windBearing          <int> 292
+    ## $ visibility           <dbl> 9.11
     ## $ cloudCover           <dbl> 0.12
-    ## $ pressure             <dbl> 1019.06
-    ## $ ozone                <dbl> 267.8
+    ## $ pressure             <dbl> 1019.11
+    ## $ ozone                <dbl> 267.84
 
 ``` r
 then <- get_forecast_for(43.2672, -70.8617, "2013-05-06T12:00:00-0400", add_headers=TRUE)
@@ -259,7 +257,7 @@ bigger_list$Maine[[1]]
 print(sprintf("You have used %s API calls.", then$`x-forecast-api-calls`))
 ```
 
-    ## [1] "You have used 22 API calls."
+    ## [1] "You have used 36 API calls."
 
 ``` r
 plot(now)
@@ -276,7 +274,7 @@ library(testthat)
 date()
 ```
 
-    ## [1] "Wed Sep 21 06:17:40 2016"
+    ## [1] "Wed Sep 21 06:22:19 2016"
 
 ``` r
 test_dir("tests/")

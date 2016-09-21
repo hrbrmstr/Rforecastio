@@ -6,7 +6,8 @@
 \alias{Rforecastio-package}
 \title{Tools to Work with the Dark Sky API}
 \description{
-Tools to Work with the Dark Sky API
+Programmatic access to the Dark Sky API <https://darksky.net/dev/docs>,
+which provides current or historical global weather conditions.
 }
 \author{
 Bob Rudis (bob@rud.is)
