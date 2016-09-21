@@ -61,7 +61,7 @@ If you wish to have text summaries presented in a different language, set
 default.
 
 See the Options section of the official
-\href{https://developer.forecast.io/docs/v2}{Forecast API documentation} for more
+\href{https://darksky.net/dev/docs}{Forecast API documentation} for more
 information.
 }
 \examples{

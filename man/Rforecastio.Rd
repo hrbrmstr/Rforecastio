@@ -4,11 +4,11 @@
 \name{Rforecastio}
 \alias{Rforecastio}
 \alias{Rforecastio-package}
-\title{An R wrapper for the Forecast API}
+\title{Tools to Work with the Dark Sky API}
 \description{
-An R wrapper for the Forecast API
+Tools to Work with the Dark Sky API
 }
 \author{
-Bob Rudis (@hrbrmstr)
+Bob Rudis (bob@rud.is)
 }
 

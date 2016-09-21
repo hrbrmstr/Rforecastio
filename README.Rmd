@@ -3,10 +3,10 @@ output: rmarkdown::github_document
 ---
 [![Build Status](https://travis-ci.org/hrbrmstr/Rforecastio.svg)](https://travis-ci.org/hrbrmstr/Rforecastio) 
 
-`Rforecastio` : Tools to Work with the 'Forecast' 'API'
+`Rforecastio` : Tools to Work with the Dark Sky API
 
-- Forecast API Docs: https://developer.forecast.io/docs/v2
-- Forecast Dev site: https://developer.forecast.io/
+- Forecast API Docs: https://darksky.net/dev/docs
+- Forecast Dev site: https://darksky.net/dev/
 
 The following functions are implemented:
 
@@ -23,6 +23,7 @@ regular data frames but get all the `dplyr` goodness, too).
 
 ### News
 
+- 2.3.0 - Fixed API URL (thx Lasse Vilhelmsen!)
 - 2.2.0 - `print()` method, made JSON & headers optional in respons object, smarter printing
 - Version 2.1.1 released - fix "language" parameter per #9
 - Version 2.1.0 released - added `httr::GET` pass-through `...` parameter to salient functions

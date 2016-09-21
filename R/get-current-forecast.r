@@ -17,7 +17,7 @@
 #' default.
 #'
 #' See the Options section of the official
-#' \href{https://developer.forecast.io/docs/v2}{Forecast API documentation} for more
+#' \href{https://darksky.net/dev/docs}{Forecast API documentation} for more
 #' information.
 #' @param latitude forecast latitude (character, decimal format)
 #' @param longitude forecast longitude (character, decimal format)
