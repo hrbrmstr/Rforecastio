@@ -50,7 +50,7 @@ get_current_forecast <- function(latitude, longitude,
                                  add_json=FALSE, add_headers=FALSE,
                                  ...) {
 
-  url <- sprintf("https://api.forecast.io/forecast/%s/%s,%s",
+  url <- sprintf("https://api.darksky.net/forecast/%s/%s,%s",
                  forecastio_api_key(), latitude, longitude)
 
   params <- list(units=units, language=language)

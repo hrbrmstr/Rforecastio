@@ -15,7 +15,7 @@
 #' default.
 #'
 #' See the Options section of the official
-#' \href{https://developer.forecast.io/docs/v2}{Forecast API documentation} for more
+#' \href{https://darksky.net/dev/docs}{Forecast API documentation} for more
 #' information.
 #'
 #' @param latitude forecast latitude (character, decimal format)
@@ -52,7 +52,7 @@ get_forecast_for <- function(latitude, longitude, timestamp,
                              add_json=FALSE, add_headers=FALSE,
                              ...) {
 
-  url <- sprintf("https://api.forecast.io/forecast/%s/%s,%s,%s",
+  url <- sprintf("https://api.darksky.net/forecast/%s/%s,%s,%s",
                  forecastio_api_key(), latitude, longitude, timestamp)
 
   params <- list(units=units, lang=language)
