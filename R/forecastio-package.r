@@ -5,7 +5,6 @@
 #' @author Bob Rudis (@@hrbrmstr)
 #' @import dplyr
 #' @importFrom httr GET content stop_for_status headers
-#' @importFrom jsonlite fromJSON
 #' @importFrom grid unit
 #' @importFrom gridExtra grid.arrange
 #' @import ggplot2
